@@ -1,27 +1,35 @@
 #include <iostream>
-#include<iomanip>
+#include <iomanip>
+#include <cmath>
 using namespace std;
 
-int main() {
-    int  iteraciones=1000000;
-    double resultado = 0.0;
+double calculaPi (){
+double pi = 0.0;
+double resultado = 1.0;
+int signo = 1;
+float denominador = 1.0;
+double decimales = 1e-7;
 
-
-    for (int i = 0; i < iteraciones; i++) {
-        double termino = 1.0 / (2 * i + 1);
-
-        if (i % 2 == 0) {
-            resultado += termino;
-        } else {
-            resultado -= termino;
-        }
-    }
-
-    double pi = 4 * resultado;
+  while (abs(resultado) >= decimales){
+    
+    resultado = (1.0 / denominador) * signo;
    
+    signo *= -1;
+   
+    denominador += 2;
+   
+    pi += resultado;
 
-    cout  << setprecision(6) << fixed << pi << endl;
-
-    return 0;
+  }
+  cout << "El valor de Pi es: " << pi << endl;
+  
+  return pi * 4;
 }
-
+ 
+ int main()
+ {
+    double resultado = calculaPi();
+    cout.precision(8);
+    cout << "El valor de Pi es: " << resultado << endl;
+    return 0;
+ }
